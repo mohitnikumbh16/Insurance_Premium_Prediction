@@ -1,0 +1,141 @@
+{% extends 'header.html' %}
+
+{% block head %}
+
+
+<title>Insurance Premium Predictor</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-6 col-lg-6">
+
+
+        <form action="/predict" method="post">
+            <legend>Premium Prediction Form</legend>
+            <div class="mb-3">
+                <label class="form-label">Age</label>
+                <input class="form-control" type="text" name="age" placeholder="Enter your age"
+                    required />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Gender</label>
+                <select class="form-control" name="sex" placeholder="Enter your Gender"
+                    required>
+
+                    <option value="male">
+                        Male
+                    </option>
+                    <option value="female">
+                        Female
+                    </option>
+                </select>
+            </div>
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">BMI</label>
+                <input class="form-control" type="text" name="bmi"
+                    placeholder="Enter a value of bmi" />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Children</label>
+                <input class="form-control" type="text" name="children" placeholder="How many children do you have ?"
+                    required />
+
+            </div>
+
+        
+            <div class="mb-3">
+                <label class="form-label">Smoker</label>
+                <select class="form-control" name="smoker" placeholder="Are you smoker ?"
+                    required>
+
+                    <option value="yes">
+                        Yes
+                    </option>
+                    <option value="no">
+                        No
+                    </option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Region</label>
+                <select class="form-control" name="region" placeholder="Enter your region"
+                    required>
+                    
+                    <option value="southeast">
+                        Southeast
+                    </option>
+                    <option value="southwest">
+                        Southwest
+                    </option>
+                    <option value="northeast">
+                        Northeast
+                    </option>
+                    <option value="northwest">
+                        Northwest
+                    </option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+
+                <input class="btn btn-primary" type="submit" value = "Predict Insurance Premium" required />
+            </div>
+
+        </form>
+    </div>
+
+    <div class="col-md-6 col-sm-12 col-xs-6 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+            Insurance Premium Price
+            </div>
+            <div class="card-body"> 
+        {% if context['premium_data'] is not none %}
+        <table class="table table-striped">
+            <caption>Insurance Premium Prediction </caption>
+            <tr>
+                <th>Input Feature</th>
+                <th>Feature Value</th>
+
+            </tr>
+            {% for column,value in context['premium_data'].items() %}
+
+
+
+            <tr>
+                <td>{{column}}</td>
+                <td>{{value[0]}}</td>
+            </tr>
+
+            {% endfor %}
+            <tr>
+
+                <td>expenses</td>
+                <td>
+                    {{ context['expenses'][0] }}
+                </td>
+            </tr>
+        </table>
+
+        {% else %}
+        
+            <h5 class="card-title">Submit Form</h5>
+            <p class="card-text">Kindly provide necessary information to estimate insurance price</p>
+            
+        
+
+        {% endif %}
+        Go to <a href="/" class="btn btn-primary">Home</a> 
+    </div>
+</div>
+    </div>
+    
+        
+    {% endblock %}

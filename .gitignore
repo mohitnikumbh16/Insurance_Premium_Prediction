@@ -14,9 +14,12 @@ dist/
 downloads/
 eggs/
 .eggs/
+premium/artifact/
+saved_models/
 lib/
 lib64/
 parts/
+insurance/
 sdist/
 var/
 wheels/
